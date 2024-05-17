@@ -67,7 +67,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $filmler["1"]["baslik"]?></h5>
                                 <p class="card-text">
-                                <?php echo $yeni_filmler = ucfirst(strtolower($filmler["1"]["aciklama"]))?>
+                                <?php echo substr($yeni_filmler = ucfirst(strtolower($filmler["1"]["aciklama"])), 0 , 50) . "..."; ?>
                                 </p>
                                 <div>
                                     <span class="badge bg-success">Yapım Tarihi: 03.12.2021</span>
@@ -89,7 +89,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $filmler["2"]["baslik"]?></h5>
                                 <p class="card-text">
-                                <?php echo $yeni_filmler = ucfirst(strtolower($filmler["2"]["aciklama"]))?>
+                                <?php echo substr($yeni_filmler = ucfirst(strtolower($filmler["2"]["aciklama"])), 0 , 50) . "..."; ?>
                                 </p>
                                 <div>
                                     <span class="badge bg-success">Yapım Tarihi: 03.12.2021</span>
@@ -112,7 +112,7 @@
                                 <h5 class="card-title">Walking Dead</h5>
                                 <h5 class="card-title"><?php echo $filmler["0"]["baslik"]?></h5>
                                 <p class="card-text">
-                                <?php echo $yeni_filmler = ucfirst(strtolower($filmler["2"]["aciklama"]))?>
+                                <?php echo substr($yeni_filmler = ucfirst(strtolower($filmler["2"]["aciklama"])), 0 , 50) . "..."; ?>
                                 </p>
                                 <div>
                                     <span class="badge bg-success">Yapım Tarihi: 03.12.2021</span>
