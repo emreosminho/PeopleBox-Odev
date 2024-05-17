@@ -1,5 +1,7 @@
 <?php
 
+    define("baslik", "Kategori");
+
     $kategori = array("Macera","Dram","Komedi","Korku");
 
     array_push($kategori,"Fantastik");
@@ -48,6 +50,7 @@
     <div class="container my-3">
         <div class="row">
             <div class="col-3">
+            <h1><?php echo baslik ?></h1>
                 <ul class="list-group">
                     <li class="list-group-item"><?php echo $kategori[0]?></li>
                     <li class="list-group-item"><?php echo $kategori[1]?></li>
