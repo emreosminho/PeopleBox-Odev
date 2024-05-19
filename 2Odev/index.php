@@ -90,13 +90,11 @@ const limit = 85;
                                         <a href="<?php echo $film["url"]; ?>"><?php echo $film["baslik"]; ?></a> <!-- baslik icin php kullanimi -->
                                     </h5>
                                     <p class="card-text">
-                                        <?php
-                                        if(strlen($film["aciklama"]) > limit) {
-                                            echo substr($film["aciklama"], 0, limit) . "...";
-                                        } else {
-                                            echo $film["aciklama"];
-                                        }
-                                        ?>
+                                        <?php if(strlen($film["aciklama"]) > limit) :?> <!-- if endif uygulamasi -->
+                                            <?php echo substr($film["aciklama"], 0, limit) . "..."; ?>
+                                            <?php else: ?>
+                                            <?php echo $film["aciklama"]; ?>
+                                        <?php endif; ?>   
                                     </p>
                                     <div>
                                         <span class="badge bg-success">Yapım Tarihi: 03.12.2021</span>
