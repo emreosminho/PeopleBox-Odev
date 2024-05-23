@@ -112,7 +112,7 @@ function kisaAciklama($aciklama, $limit) {
     };
 }
 
-//Odev3 
+//Odev3 fonksiyon eklendi.
 
 function getGuncelFilmler() {
     $allMovies = getData()["movies"];

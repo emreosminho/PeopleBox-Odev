@@ -1,4 +1,7 @@
 <?php
+
+// fonksiyond dahil edildi.
+
 $ozet = count(getData()["categories"]).' kategoride '.count(getGuncelFilmler()).'  film listelenmiştir';
 const baslik = "Güncel Filmler";
 ?>
