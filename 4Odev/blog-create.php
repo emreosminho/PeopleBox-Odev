@@ -2,14 +2,48 @@
     require "libs/vars.php";
     require "libs/functions.php";  
 
+    $title = $description = "";
+    $title_err = $description_err = "";
+
     if ($_SERVER["REQUEST_METHOD"]=="POST") {
-        $title = $_POST["title"];
-        $description = $_POST["description"];
+
+
+        $input_title = trim($_POST["title"]);
+
+        if(empty($input_title)){
+            $title_err = "title boş geçilemez.";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$title_err}</div>"; // Odev 4 
+        }else if(strlen($input_title) > 150){
+            $title_err = "title için çok fazla karakter kullandınız. Max: 150kr";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$title_err}</div>";
+        }else{
+            $title = control_input($input_title);
+        }
+
+
+        $input_description = trim($_POST["description"]);
+
+        if(empty($input_description)){
+            $description_err = "description boş geçilemez.";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$description_err}</div>"; // Odev 4
+        }else if(strlen($input_description) < 10){
+            $description_err = "description için çok az karakter kullandınız. Min: 11kr";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$description_err}</div>";
+        }else{
+            $description = $input_description;
+        }
+
+
         $image = $_POST["image"];
         $url = $_POST["url"];
 
-        createBlog($title,$description,$image,$url);
-        header('Location: index.php');
+        if(empty($title_err) && empty($description_err)){
+            if( createBlog($title,$description,$image,$url)){
+                header('Location: index.php');
+            }else{
+                echo "Yükleme sırasında hata oluştu";
+            }
+        }  
     }
 ?>
 
@@ -32,12 +66,12 @@
 
                         <div class="mb-3">
                             <label for="title" class="form-label">Başlık</label>
-                            <input type="text" class="form-control" name="title" id="title">
+                            <input type="text" class="form-control <?php echo (!empty($title_err)) ? 'is-invalid':''?>" name="title" id="title" value="<?php echo $title?>">
                         </div>
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Açıklama</label>
-                            <textarea name="description" id="description" class="form-control"></textarea>
+                            <textarea name="description" id="description" class="form-control <?php echo (!empty($description_err)) ? 'is-invalid':''?>"></textarea>
                         </div>
 
                         <div class="mb-3">

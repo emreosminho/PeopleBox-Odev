@@ -2,18 +2,51 @@
     require "libs/vars.php";
     require "libs/functions.php";  
 
+    $title = $description = "";
+    $title_err = $description_err = "";
+
     $id = $_GET["id"];
-    $selectedMovie = getBlogByID($id);
+    $result = getBlogByID($id);
+    $selectedMovie = mysqli_fetch_assoc($result);
 
     if ($_SERVER["REQUEST_METHOD"]=="POST") {
         $title = $_POST["title"];
         $description = $_POST["description"];
         $image = $_POST["image"];
         $url = $_POST["url"];
-        $isActive =isset($_POST["isActive"]) ? true : false;
+        $isActive =isset($_POST["isActive"]) ? 1 : 0;
 
-        editBlog($id,$title,$description,$image,$url,$isActive);
-        header('Location: index.php');
+        $input_title = trim($title); // Odev 4
+
+        if(empty($input_title)){
+            $title_err = "Burada title boş olamaz !!!";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$title_err}</div>";
+        }else if(strlen($input_title) > 150){
+            $title_err = "Bu title için fazla karakter... Max: 100kr";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$title_err}</div>";
+        }else{
+            $title = control_input($input_title);
+        }
+
+        $input_description = trim($description); // Odev 4
+
+        if(empty($input_description)){
+            $description_err = "Burası boş olmamalıdır...";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$description_err}</div>";
+        }else if(strlen($input_description) < 10){
+            $description_err = "Bu description karakter sınırını aştınız. Min: 10kr";
+            echo "<div class='alert alert-danger mb-0 text-center'>{$description_err}</div>";
+        }else{
+            $description = $input_description;
+        }
+
+        if(empty($title_err) && empty($description_err)) {
+            if(editBlog($id,$title,$description,$image,$url,$isActive)){
+                header('Location: index.php');
+            }else{
+                echo "Güncelleme sırasında hata oluştu";
+            }
+        }
     }
 ?>
 
@@ -55,7 +88,7 @@
                         </div>
                         <div class="form-check mb-3">
                             <label for="isActive" class="form-check-label">Is Active</label>
-                            <input type="checkbox" class="form-check-input" name="isActive" id="isActive" <?php if($selectedMovie["is-active"]){echo "checked";} ?>>
+                            <input type="checkbox" class="form-check-input" name="isActive" id="isActive" <?php if($selectedMovie["isActive"]){echo "checked";} ?>>
                         </div>
 
                         <input type="submit" value="Submit" class="btn btn-primary">

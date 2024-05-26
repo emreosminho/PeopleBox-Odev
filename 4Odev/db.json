@@ -58,17 +58,7 @@
             "image": "3.jpeg",
             "comments": 0,
             "likes": 10,
-            "is-active": false
-        },
-        {
-            "id": 4,
-            "title": "Film Yeni",
-            "description": "Film a\u00e7\u0131klama",
-            "image": "3.jpeg",
-            "url": "film-yeni",
-            "comments": 0,
-            "likes": 0,
-            "is-active": false
+            "is-active": true
         }
     ],
     "categories": [
